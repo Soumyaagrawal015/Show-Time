@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ShowTime – Book tickets for movies, concerts, theatre, comedy and sports. Browse, search, and book your favorite shows instantly." />
+  <title>ShowTime – Book Your Favorite Shows Instantly</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <noscript>Your browser has JavaScript disabled. Enable it to experience interactive booking features.</noscript>
+
+  <!-- Header / Navbar -->
+  <header class="header" id="top">
+    <nav class="nav container">
+      <a href="#home" class="logo">🎟️ <span>ShowTime</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links" role="menu">
+        <li role="none"><a role="menuitem" href="#home">Home</a></li>
+        <li role="none"><a role="menuitem" href="#shows">Shows</a></li>
+        <li role="none"><a role="menuitem" href="#tickets">Tickets</a></li>
+        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="loginBtn" aria-haspopup="dialog">Log in</button>
+        <button class="btn btn-primary" id="signupBtn" aria-haspopup="dialog">Sign up</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <h1>Book Your Favorite Shows Instantly</h1>
+      <p>Movies, concerts, theatre, comedy and sports — all in one place.</p>
+      <div class="hero-cta">
+        <a href="#tickets" class="btn btn-glow">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Bar -->
+  <section class="search" aria-labelledby="search-title">
+    <div class="container">
+      <h2 id="search-title" class="sr-only">Search Shows</h2>
+      <form id="searchForm" class="search-form" autocomplete="off">
+        <div class="field">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" placeholder="City or Venue" />
+        </div>
+        <div class="field">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" />
+        </div>
+        <div class="field">
+          <label for="genre">Genre</label>
+          <select id="genre" name="genre">
+            <option value="all">All</option>
+            <option value="movie">Movie</option>
+            <option value="theatre">Theatre</option>
+            <option value="concert">Concert</option>
+            <option value="comedy">Comedy</option>
+            <option value="sports">Sports</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Featured Shows -->
+  <section class="featured" id="shows" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="featured-title">Featured Shows</h2>
+        <p>Handpicked events trending near you</p>
+      </div>
+      <div id="showsGrid" class="shows-grid" role="list" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Categories Carousel -->
+  <section class="categories" aria-labelledby="categories-title">
+    <div class="container">
+      <div class="section-head row">
+        <h2 id="categories-title">Browse by Category</h2>
+        <div class="carousel-actions">
+          <button class="icon-btn" id="catPrev" aria-label="Scroll categories left">◀</button>
+          <button class="icon-btn" id="catNext" aria-label="Scroll categories right">▶</button>
+        </div>
+      </div>
+      <div class="carousel" id="categoryCarousel" tabindex="0" aria-roledescription="carousel" aria-label="Categories">
+        <button class="chip active" data-category="all">✨ All</button>
+        <button class="chip" data-category="movie">🎬 Movies</button>
+        <button class="chip" data-category="theatre">🎭 Theatre</button>
+        <button class="chip" data-category="concert">🎸 Concerts</button>
+        <button class="chip" data-category="comedy">😂 Comedy</button>
+        <button class="chip" data-category="sports">🏅 Sports</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking" id="tickets" aria-labelledby="booking-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="booking-title">Book Tickets</h2>
+        <p>Select your show, choose seats, and confirm</p>
+      </div>
+
+      <form id="bookingForm" class="booking-form" autocomplete="off">
+        <div class="row wrap">
+          <div class="field grow">
+            <label for="showSelect">Show</label>
+            <select id="showSelect" name="show" required></select>
+          </div>
+          <div class="field">
+            <label for="showDate">Date</label>
+            <input type="date" id="showDate" name="showDate" required />
+          </div>
+          <div class="field">
+            <label for="showTime">Time</label>
+            <select id="showTime" name="showTime" required>
+              <option value="18:00">6:00 PM</option>
+              <option value="19:30" selected>7:30 PM</option>
+              <option value="21:00">9:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="legend">
+          <span><span class="seat"></span> Available</span>
+          <span><span class="seat selected"></span> Selected</span>
+          <span><span class="seat occupied"></span> Booked</span>
+        </div>
+
+        <div id="seatGrid" class="seat-grid" role="grid" aria-label="Select seats"></div>
+
+        <div class="summary">
+          <div class="price-line">
+            <span><strong>Seats Selected:</strong> <span id="count">0</span></span>
+            <span><strong>Total:</strong> <span id="total">$0</span></span>
+          </div>
+          <button type="submit" class="btn btn-glow">Confirm Booking</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="testimonials-title">What Our Users Say</h2>
+        <p>Real reviews from real fans</p>
+      </div>
+      <div class="testimonials-grid">
+        <article class="t-card">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop" alt="Profile of Sarah" />
+          <div class="t-content">
+            <div class="stars" aria-label="5 out of 5">★★★★★</div>
+            <p>Booking was a breeze and the seats were perfect. Loved the neon vibes!</p>
+            <h4>Sarah P.</h4>
+          </div>
+        </article>
+        <article class="t-card">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=300&auto=format&fit=crop" alt="Profile of Miguel" />
+          <div class="t-content">
+            <div class="stars" aria-label="4.5 out of 5">★★★★☆</div>
+            <p>Great selection of shows and a smooth checkout process.</p>
+            <h4>Miguel R.</h4>
+          </div>
+        </article>
+        <article class="t-card">
+          <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=300&auto=format&fit=crop" alt="Profile of Aisha" />
+          <div class="t-content">
+            <div class="stars" aria-label="5 out of 5">★★★★★</div>
+            <p>The seat picker is so intuitive. Found front-row spots in seconds!</p>
+            <h4>Aisha K.</h4>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact" aria-labelledby="footer-title">
+    <div class="container footer-grid">
+      <div>
+        <h3 id="footer-title" class="logo">🎟️ <span>ShowTime</span></h3>
+        <p>Experience the thrill of live entertainment — movies, concerts, theatre, comedy, and sports.</p>
+        <div class="socials">
+          <a href="#" aria-label="X / Twitter" class="social">✖</a>
+          <a href="#" aria-label="Instagram" class="social">⧖</a>
+          <a href="#" aria-label="YouTube" class="social">▶</a>
+          <a href="#" aria-label="Facebook" class="social">f</a>
+        </div>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p>Get updates on new shows and exclusive offers.</p>
+        <form id="newsletterForm" class="newsletter" autocomplete="off">
+          <input type="email" id="newsletterEmail" placeholder="Your email" aria-label="Your email" required />
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#shows">Shows</a></li>
+          <li><a href="#tickets">Tickets</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copyright">
+      <p>© <span id="year"></span> ShowTime. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Auth Modals -->
+  <dialog id="authDialog" class="dialog">
+    <form method="dialog" class="dialog-card">
+      <header class="dialog-head">
+        <h3 id="dialogTitle">Welcome</h3>
+        <button class="icon-btn close" value="cancel" aria-label="Close">✕</button>
+      </header>
+      <div class="dialog-body">
+        <div class="field">
+          <label for="authEmail">Email</label>
+          <input type="email" id="authEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="authPassword">Password</label>
+          <input type="password" id="authPassword" placeholder="••••••••" required />
+        </div>
+      </div>
+      <footer class="dialog-foot">
+        <button class="btn btn-ghost" value="cancel">Cancel</button>
+        <button class="btn btn-primary" value="default">Continue</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="./script.js" defer></script>
+</body>
+</html>
